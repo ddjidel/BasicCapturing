@@ -8,9 +8,11 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button Content="Save Candidate" x:Name="BtnSave" HorizontalAlignment="Center" Click="BtnSave_Click" />
             <Button Content="Capture Resume" x:Name="BtnGotoPhoto" HorizontalAlignment="Center" Click="BtnGotoPhoto_Click" />
             <Button Content="Record Interview" x:Name="BtnGotoVideo" HorizontalAlignment="Center" Click="BtnGotoVideo_Click" />
         </StackPanel>
+        <TextBox x:Name="lastName" HorizontalAlignment="Left" Margin="78,49,0,0" TextWrapping="Wrap" Text="Last Name" VerticalAlignment="Top" RenderTransformOrigin="-4.658,-1.575" Width="367" TextChanged="lastName_TextChanged"/>
     </Grid>
 </Page>

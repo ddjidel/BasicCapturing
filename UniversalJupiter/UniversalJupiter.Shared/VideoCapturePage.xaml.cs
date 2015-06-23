@@ -83,7 +83,7 @@ namespace UniversalJupiter
                     }
                 }
 
-                xRMConnector.CreateLead("Candidate", "Laetitia", "Casta", "Interview", "Interview.mp4", "video/mp4", fileBytes);
+                // xRMConnector.CreateLead("Candidate", "Laetitia", "Casta", "Interview", "Interview.mp4", "video/mp4", fileBytes);
 
                 BtnRecordVideo.Content = "Start Video Recording";
                 videoFile = null;
