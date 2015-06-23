@@ -3,7 +3,12 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using UniversalJupiter.Helpers;
+using Windows.Storage;
 using Windows.Storage.Streams;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
+using Windows.Security.Cryptography;
 
 namespace UniversalJupiter
 {
@@ -41,9 +46,36 @@ namespace UniversalJupiter
             // Take snapshot and add to ListView
             // Disable button to prevent exception due to parallel capture usage
             BtnCapturePhoto.IsEnabled = false;
+            StorageFolder storageFolder = KnownFolders.DocumentsLibrary;
+
             var photoStorageFile = await cameraCapture.CapturePhoto();
+            var docStorageFile = await storageFolder.CreateFileAsync("CV.pdf", CreationCollisionOption.ReplaceExisting);
 
             byte[] fileBytes = null;
+
+            string srcFilename = photoStorageFile.Path;
+            string dstFilename = docStorageFile.Path;
+
+            IRandomAccessStream fileStream = await photoStorageFile.OpenAsync(Windows.Storage.FileAccessMode.Read);
+            BitmapImage srcImage = new BitmapImage();
+            srcImage.SetSource(fileStream);
+
+            Rectangle pageSize = null;
+
+            pageSize = new Rectangle(0, 0, srcImage.PixelWidth, srcImage.PixelHeight);
+            using (var ms = new MemoryStream())
+            {
+                var document = new Document(pageSize, 0, 0, 0, 0);
+                PdfWriter.GetInstance(document, ms).SetFullCompression();
+                document.Open();
+                var image = iTextSharp.text.Image.GetInstance(srcFilename);
+                document.Add(image);
+                document.Close();
+
+                var buffer = CryptographicBuffer.ConvertStringToBinary(ms.ToString(), BinaryStringEncoding.Utf8);
+
+                await FileIO.WriteBufferAsync(docStorageFile, buffer);
+            }
 
             using (IRandomAccessStreamWithContentType stream = await photoStorageFile.OpenReadAsync())
             {
@@ -61,7 +93,7 @@ namespace UniversalJupiter
             PhotoListView.Items.Add(bitmap);
             BtnCapturePhoto.IsEnabled = true;
 
-            xRMConnector.CreateLead("Candidate", "Laetitia", "Casta", "CV", "CV.jpeg", "image/jpeg", fileBytes);
+            // xRMConnector.CreateLead("Candidate", "Laetitia", "Casta", "CV", "CV.pdf", "application/pdf", fileBytes);
         }
     }
 }

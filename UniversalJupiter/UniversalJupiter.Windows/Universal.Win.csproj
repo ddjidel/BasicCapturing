@@ -118,9 +118,6 @@
     </AppxManifest>
     <None Include="CaptureKeyFile.snk" />
     <None Include="packages.config" />
-    <None Include="Universal.Win_StoreKey.pfx" />
-    <None Include="Universal.Win_TemporaryKey.pfx" />
-    <None Include="UniversalJupiter.Windows_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Logo.scale-100.png" />
@@ -130,6 +127,9 @@
     <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\packages\iTextSharp.5.5.6\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
