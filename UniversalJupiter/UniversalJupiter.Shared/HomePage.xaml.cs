@@ -23,12 +23,7 @@ namespace UniversalJupiter
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            xRMConnector.CreateLead("Candidate", "Laetitia", lastName.Text);
-        }
-
-        private void lastName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+            xRMConnector.CreateLead("Candidate", firstName.Text, lastName.Text);
         }
     }
 }
