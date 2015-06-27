@@ -15,5 +15,6 @@
         </StackPanel>
         <TextBox x:Name="lastName" HorizontalAlignment="Left" Margin="74,120,0,0" TextWrapping="Wrap" Text="Last Name" VerticalAlignment="Top" Width="367" />
         <TextBox x:Name="firstName" HorizontalAlignment="Left" Margin="74,66,0,0" TextWrapping="Wrap" Text="First Name" VerticalAlignment="Top" Width="367"/>
+        <DatePicker HorizontalAlignment="Left" Margin="74,174,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>
